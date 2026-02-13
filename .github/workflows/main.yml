@@ -22,6 +22,10 @@ jobs:
           pip install -r api/requirements.txt
           pip install mlflow dvc
 
+      - name: Pull data using DVC
+        run: |
+          dvc pull
+
       - name: Run training script (basic test)
         run: |
           python ml/train.py
