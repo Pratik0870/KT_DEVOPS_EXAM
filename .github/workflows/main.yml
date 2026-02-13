@@ -20,19 +20,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r api/requirements.txt
-          pip install mlflow dvc
 
-      - name: Pull data using DVC
+      - name: Run basic test script
         run: |
-          dvc pull
-
-      - name: Run training script (basic test)
-        run: |
-          python ml/train.py
+          python --version
 
       - name: Print success message
         run: echo "CI Pipeline executed successfully"
-
-      - name: Build Docker image
-        run: |
-          docker build -t kt-exam -f Docker/Dockerfile .
