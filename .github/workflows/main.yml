@@ -1,9 +1,8 @@
-# TODO: Students must fix workflow
 name: CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
   build:
@@ -13,14 +12,23 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
       - name: Install dependencies
         run: |
-          echo "TODO: pip install -r requirements"
+          pip install -r api/requirements.txt
+          pip install mlflow dvc
 
-      - name: Run tests
+      - name: Run training script (basic test)
         run: |
-          echo "TODO: run test script"
+          python ml/train.py
+
+      - name: Print success message
+        run: echo "CI Pipeline executed successfully"
 
       - name: Build Docker image
         run: |
-          echo "TODO: docker build"
+          docker build -t kt-exam -f Docker/Dockerfile .
