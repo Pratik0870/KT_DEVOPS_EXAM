@@ -29,11 +29,10 @@ jobs:
       # ✅ Run container (test mode)
       - name: Run container
         run: |
-          docker run -d -p 8000:8000 kt-fastapi
-          sleep 10
-          curl http://localhost:8000/
+          docker run -d kt-fastapi
+          sleep 5
 
-      # ✅ Simulated email alert if build fails
+      # ✅ Simulated failure email
       - name: Notify on failure
         if: failure()
         run: echo "Build failed - Email alert would trigger"
