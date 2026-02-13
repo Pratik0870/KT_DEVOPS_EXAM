@@ -21,9 +21,26 @@ jobs:
         run: |
           pip install -r api/requirements.txt
 
-      - name: Run basic test script
+      - name: Run training script (basic test)
         run: |
-          python --version
+          python ml/train.py
+
+      # ✅ Task 5 Requirement 1 — Build Docker Image
+      - name: Build Docker image
+        run: |
+          docker build -t kt-fastapi -f Docker/Dockerfile .
+
+      # ✅ Task 5 Requirement 2 — Run FastAPI in test mode
+      - name: Run container (test mode)
+        run: |
+          docker run -d -p 8000:8000 kt-fastapi
+          sleep 10
+          curl http://localhost:8000/
+
+      # ✅ Task 5 Requirement 3 — Simulated email on failure
+      - name: Notify on failure
+        if: failure()
+        run: echo "Build failed — Email alert would be triggered here"
 
       - name: Print success message
         run: echo "CI Pipeline executed successfully"
