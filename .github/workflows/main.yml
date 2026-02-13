@@ -17,27 +17,26 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install all dependencies
+      - name: Install dependencies
         run: |
           pip install -r requirements.txt
 
-      - name: Run training script
-        run: |
-          python ml/train.py
-
+      # ✅ Build Docker Image
       - name: Build Docker image
         run: |
           docker build -t kt-fastapi -f Docker/Dockerfile .
 
-      - name: Run container (test mode)
+      # ✅ Run container (test mode)
+      - name: Run container
         run: |
           docker run -d -p 8000:8000 kt-fastapi
           sleep 10
           curl http://localhost:8000/
 
+      # ✅ Simulated email alert if build fails
       - name: Notify on failure
         if: failure()
-        run: echo "Build failed — Email alert would be triggered here"
+        run: echo "Build failed - Email alert would trigger"
 
       - name: Print success message
         run: echo "CI Pipeline executed successfully"
