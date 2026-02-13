@@ -1,19 +1,34 @@
-# KT Practical Exam – Starter Kit
+# KT DevOps & MLOps Practical
 
-This repository contains the starter code for your 2-hour exam.
+## 📌 Project Overview
+This project demonstrates an end-to-end ML DevOps pipeline for predicting house prices.
 
-## Contains
-- FastAPI app with TODOs
-- ML training skeleton
-- DVC pipeline placeholder
-- Dockerfile + Docker Compose (incomplete)
-- GitHub Actions workflow (TODO)
+The system includes:
+- DVC for data versioning
+- MLflow for experiment tracking
+- FastAPI for model serving
+- Docker & Docker Compose for containerization
+- GitHub Actions for CI/CD
+- Email alert system on failure
 
-## Your Tasks
-You must:
-1. Set up DVC + MLflow
-2. Train model → save as api/model.pkl
-3. Implement API prediction
-4. Add email alerts on failure
-5. Dockerize and run with docker-compose
-6. Push everything to a NEW public GitHub repo
+---
+
+## 🔄 Project Workflow
+
+1. Dataset tracked using DVC
+2. Model trained using Scikit-learn
+3. Metrics logged using MLflow (MAE, RMSE)
+4. Model saved as model.pkl
+5. FastAPI serves prediction endpoint
+6. Email alert triggered on failure
+7. Docker containerizes application
+8. GitHub Actions builds & tests automatically
+
+---
+
+## ▶️ Run Locally (Without Docker)
+
+```bash
+pip install -r requirements.txt
+python ml/train.py
+uvicorn api.app:app --reload
