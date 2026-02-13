@@ -1,0 +1,12 @@
+# DVC storage
+dvc_storage/
+
+# MLflow
+mlruns/
+
+# Model artifact
+api/model.pkl
+
+# Python
+__pycache__/
+*.pyc

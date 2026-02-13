@@ -25,7 +25,8 @@ def train():
         predictions = model.predict(X)
 
         mae = mean_absolute_error(y, predictions)
-        rmse = mean_squared_error(y, predictions, squared=False)
+        rmse = mean_squared_error(y, predictions) ** 0.5
+
 
         # Log parameters
         mlflow.log_param("model_type", "LinearRegression")
