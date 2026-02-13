@@ -17,27 +17,24 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install dependencies
+      - name: Install all dependencies
         run: |
-          pip install -r api/requirements.txt
+          pip install -r requirements.txt
 
-      - name: Run training script (basic test)
+      - name: Run training script
         run: |
           python ml/train.py
 
-      # ✅ Task 5 Requirement 1 — Build Docker Image
       - name: Build Docker image
         run: |
           docker build -t kt-fastapi -f Docker/Dockerfile .
 
-      # ✅ Task 5 Requirement 2 — Run FastAPI in test mode
       - name: Run container (test mode)
         run: |
           docker run -d -p 8000:8000 kt-fastapi
           sleep 10
           curl http://localhost:8000/
 
-      # ✅ Task 5 Requirement 3 — Simulated email on failure
       - name: Notify on failure
         if: failure()
         run: echo "Build failed — Email alert would be triggered here"
