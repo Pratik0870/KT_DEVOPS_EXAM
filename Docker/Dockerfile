@@ -1,14 +1,13 @@
-# TODO: Students must complete this
-FROM python:3.10-slim
+FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY ../api/requirements.txt .
+COPY api/requirements.txt .
 
-# TODO: install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# TODO: copy app.py, utils.py, model.pkl
+COPY api/ .
 
 EXPOSE 8000
 
-# TODO: run uvicorn on container start
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
